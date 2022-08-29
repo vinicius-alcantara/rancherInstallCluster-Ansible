@@ -1,0 +1,8 @@
+---
+# handlers 
+
+ - name: Restart SSHD
+   systemd:
+     state: restarted
+     daemon_reload: yes
+     name: sshd

@@ -1,0 +1,25 @@
+---
+
+ - name: Generate inventory install cluster rancher 
+   ansible.builtin.shell: egrep -i "RANCHER" "{{ inventory_all_servers }}" >> "{{ inventory_cluster_rancher }}"
+
+ - name: Generate inventory install cluster K8S DEV 
+   ansible.builtin.shell: egrep -i "RANCHER" "{{ inventory_all_servers }}" >> "{{ inventory_cluster_k8s_dev }}"
+
+ - name: Generate inventory install cluster K8S PROD 
+   ansible.builtin.shell: egrep -i "RANCHER" "{{ inventory_all_servers }}" >> "{{ inventory_cluster_k8s_prod }}"
+
+ - name: Declare Variables step1 
+   ansible.builtin.shell: egrep -i "RANCHER" "{{ inventory_all_servers }}" | tr [A-Z] [a-z] | sed "s/ansible_host//g" | tr " " ':' | tr "=" " " >> "{{ path_vars_config_main }}"
+#   when: ansible_default_ipv4.address == "{{ ansible_server }}"
+
+ - name: Declare Variables step2
+   ansible.builtin.shell: egrep -i "DEV" "{{ inventory_all_servers }}" | tr [A-Z] [a-z] | sed "s/ansible_host//g" | tr " " ':' | tr "=" " " >> "{{ path_vars_config_main }}"
+#   when: ansible_default_ipv4.address == "{{ ansible_server }}"
+
+ - name: Declare Variables step3
+   ansible.builtin.shell: egrep -i "PROD" "{{ inventory_all_servers }}" | tr [A-Z] [a-z] | sed "s/ansible_host//g" | tr " " ':' | tr "=" " " >> "{{ path_vars_config_main }}"
+#   when: ansible_default_ipv4.address == "{{ ansible_server }}"
+
+      
+...

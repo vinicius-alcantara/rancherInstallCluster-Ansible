@@ -1,0 +1,10 @@
+---
+
+ - name: Install prerequisites 
+   hosts: all
+   roles:
+#     - updateOSLinux
+#     - packagesInstall
+     - config
+
+...

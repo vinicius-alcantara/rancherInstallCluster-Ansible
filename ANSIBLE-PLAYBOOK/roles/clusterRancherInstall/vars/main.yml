@@ -1,0 +1,16 @@
+---
+
+path_script_ssh_pass: "/root/PROJETO-RANCHER-ITURAN/SCRIPTS/sshPassExportKey.sh"
+script_dir_rke_install_rancher_cluster: "/root/PROJETO-RANCHER-ITURAN/RKE-RANCHER"
+path_config_cluster_file_rke: "/root/PROJETO-RANCHER-ITURAN/RKE-RANCHER/cluster.yml"
+user_ssh: "root"
+ssh_pass: "h4ck3r1918"
+ranche_hostname_node1: "rancher-node1"
+ranche_hostname_node2: "rancher-node2"
+ranche_hostname_node3: "rancher-node3"
+ranche_ip_node1: "10.1.203.83"
+ranche_ip_node2: "10.1.203.64"
+ranche_ip_node3: "10.1.203.84"
+path_ssh_key: "/root/.ssh/id_rsa"
+k8s_version: "v1.22.6-rancher1-1"
+

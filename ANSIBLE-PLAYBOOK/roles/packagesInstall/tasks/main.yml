@@ -1,0 +1,6 @@
+---
+
+ - name: Packages List Install
+   include_tasks: packagesInstall.yml
+
+...

@@ -1,0 +1,11 @@
+---
+
+ansible_server: 192.168.100.4
+docker_package_version: "docker-ce=5:20.10.12~3-0~ubuntu-focal" 
+docker_ce_cli_package_version: "docker-ce-cli=5:20.10.12~3-0~ubuntu-focal"
+url_download_docker_gpg_key: "https://download.docker.com/linux/ubuntu/gpg"
+path_archive_docker_gpg_key: "/usr/share/keyrings/docker-archive-keyring.gpg"
+url_download_docker: "https://download.docker.com/linux/ubuntu"
+docker_source_list: "/etc/apt/sources.list.d/docker.list"
+
+...

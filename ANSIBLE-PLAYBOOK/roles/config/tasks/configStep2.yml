@@ -1,0 +1,13 @@
+---
+
+ - name: Convert template to shell script - SSH key export to VMs cluster
+   template:
+     src: sshPassExportKey.j2
+     dest: "{{ path_script_ssh_pass }}"
+     owner: root
+     group: root
+     mode: 0744
+   when: ansible_default_ipv4.address == "{{ ansible_server }}"
+
+# - name: Install NTP client
+# - name: Config NTP

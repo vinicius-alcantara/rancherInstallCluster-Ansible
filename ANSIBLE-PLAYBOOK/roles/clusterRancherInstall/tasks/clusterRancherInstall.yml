@@ -1,0 +1,28 @@
+---
+
+ - name: Convert template to config cluster.yml - RKE
+   template:
+     src: clusterRancherRKE.j2
+     dest: "{{ path_config_cluster_file_rke }}"
+     owner: root
+     group: root
+     mode: 0744
+   when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
+
+ - name: Execute script SSH key export to VMs cluster
+   ansible.builtin.shell: bash "{{ path_script_ssh_pass }}"
+   when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
+
+ - name: Install cluster rancher via RKE
+   ansible.builtin.shell: rke up
+   args:
+    chdir: "{{ script_dir_rke_install_rancher_cluster }}"
+   register: output_install_rancher_cluster
+   when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
+
+ - name: Output install cluster 
+   debug:
+     msg: "{{ output_install_rancher_cluster }}"
+   when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
+
+...

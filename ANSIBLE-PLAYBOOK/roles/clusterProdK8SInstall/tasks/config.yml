@@ -1,0 +1,16 @@
+---
+
+ - name: Disable Swap
+   ansible.builtin.shell: swapoff -a && sed -i '/swap/s/^\(.*\)$/#\1/g' /etc/fstab && mount -a
+   when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
+
+ - name: Enable net bridge - Iptable 
+   sysctl:
+     name: net.bridge.bridge-nf-call-iptables
+     state: present
+     sysctl_set: yes
+     value: "1"
+     reload: yes
+   when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
+   
+...

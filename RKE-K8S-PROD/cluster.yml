@@ -1,0 +1,41 @@
+nodes:
+  - address: 10.1.203.77
+    user: user
+    kubernetes_version: v1.20.10-rancher1-1
+    hostname_override: master1
+    enable_cri_dockerd: true
+    role: [controlplane, etcd]
+  - address: 10.1.203.78
+    user: user
+    kubernetes_version: v1.20.10-rancher1-1
+    hostname_override: master2
+    enable_cri_dockerd: true
+    role: [controlplane, etcd]
+  - address: 10.1.203.79
+    user: user
+    kubernetes_version: v1.20.10-rancher1-1
+    hostname_override: master3
+    enable_cri_dockerd: true
+    role: [controlplane, etcd]
+  - address: 10.1.203.80
+    user: user
+    kubernetes_version: v1.20.10-rancher1-1
+    hostname_override: worker1
+    enable_cri_dockerd: true
+    role: [worker]
+  - address: 10.1.203.81
+    user: user
+    kubernetes_version: v1.20.10-rancher1-1
+    hostname_override: worker2
+    enable_cri_dockerd: true
+    role: [worker]
+
+network:
+  plugin: weave
+
+services:
+  etcd:
+    snapshot: true
+    creation: 6h
+    retention: 24h
+

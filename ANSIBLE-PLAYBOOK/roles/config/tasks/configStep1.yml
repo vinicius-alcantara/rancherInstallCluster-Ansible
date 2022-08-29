@@ -1,0 +1,42 @@
+---
+
+ - name: Disable Swap
+   ansible.builtin.shell: swapoff -a && sed -i '/swap/s/^\(.*\)$/#\1/g' /etc/fstab && mount -a
+   when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu" and ansible_default_ipv4.address != "{{ ansible_server }}"
+
+ - name: Add user in group docker
+   ansible.builtin.shell: sudo usermod -aG docker $USER
+   when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu" and ansible_default_ipv4.address != "{{ ansible_server }}"
+
+ - name: Enable net bridge - Iptables 
+   sysctl:
+     name: net.bridge.bridge-nf-call-iptables
+     state: present
+     sysctl_set: yes
+     value: "1"
+     reload: yes
+   when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu" and ansible_default_ipv4.address != "{{ ansible_server }}"
+
+ - name: Permit root login - Enable
+   lineinfile:
+     path: "/etc/ssh/sshd_config"
+     regexp: "^#PermitRootLogin"
+     line: "PermitRootLogin yes"
+     state: present
+   notify:
+    - Restart SSHD
+   when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu" and ansible_default_ipv4.address != "{{ ansible_server }}"
+
+ - name: Declare Variables step1
+   ansible.builtin.shell: egrep -i "RANCHER" "{{ inventory_all_servers }}" | tr [A-Z] [a-z] | sed "s/ansible_host//g" | tr " " ':' | tr "=" " " >> "{{ path_vars_config_main }}"
+   when: ansible_default_ipv4.address == "{{ ansible_server }}"
+
+ - name: Declare Variables step2
+   ansible.builtin.shell: egrep -i "DEV" "{{ inventory_all_servers }}" | tr [A-Z] [a-z] | sed "s/ansible_host//g" | tr " " ':' | tr "=" " " >> "{{ path_vars_config_main }}"
+   when: ansible_default_ipv4.address == "{{ ansible_server }}"
+
+ - name: Declare Variables step3
+   ansible.builtin.shell: egrep -i "PROD" "{{ inventory_all_servers }}" | tr [A-Z] [a-z] | sed "s/ansible_host//g" | tr " " ':' | tr "=" " " >> "{{ path_vars_config_main }}"
+   when: ansible_default_ipv4.address == "{{ ansible_server }}"
+      
+...

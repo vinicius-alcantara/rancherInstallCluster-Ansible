@@ -1,0 +1,78 @@
+#!/bin/bash
+
+USER_SSH={{ user_ssh }};
+SSH_PASS={{ ssh_pass }};
+PATH_ID_RSA_KEY={{ path_ssh_key }};
+
+#### Inventory rancher cluster ####
+
+RANCHER_IP_NODE[0]="{{ rancher_node1 }}";
+RANCHER_IP_NODE[1]="{{ rancher_node2 }}";
+RANCHER_IP_NODE[2]="{{ rancher_node3 }}";
+
+#### Inventory K8S cluster DEV ####
+
+K8S_IP_CONTROLLER_DEV[0]="{{ k8s_controller1_dev }}";
+K8S_IP_CONTROLLER_DEV[1]="{{ k8s_controller2_dev }}";
+K8S_IP_CONTROLLER_DEV[2]="{{ k8s_controller3_dev }}";
+
+K8S_IP_WORKER_DEV[0]="{{ k8s_worker1_dev }}";
+K8S_IP_WORKER_DEV[1]="{{ k8s_worker2_dev }}";
+K8S_IP_WORKER_DEV[2]="{{ k8s_worker3_dev }}";
+
+#### Inventory K8S cluster PROD ####
+
+K8S_IP_CONTROLLER_PROD[0]="{{ k8s_controller1_prod }}";
+K8S_IP_CONTROLLER_PROD[1]="{{ k8s_controller2_prod }}";
+K8S_IP_CONTROLLER_PROD[2]="{{ k8s_controller3_prod }}";
+
+K8S_IP_WORKER_PROD[0]="{{ k8s_worker1_prod }}";
+K8S_IP_WORKER_PROD[1]="{{ k8s_worker2_prod }}";
+K8S_IP_WORKER_PROD[2]="{{ k8s_worker3_prod }}";
+
+{% raw %}
+CONDITION_VALUE_RANCHER="$(echo "${#RANCHER_IP_NODE[@]}"-1 | bc)";
+{% endraw %}
+
+{% raw %}
+CONDITION_VALUE_CONTROLLERS_DEV="$(echo "${#K8S_IP_CONTROLLER-DEV[@]}"-1 | bc)";
+{% endraw %}
+
+{% raw %}
+CONDITION_VALUE_WORKERS_DEV="$(echo "${#K8S_IP_WORKER-DEV[@]}"-1 | bc)";
+{% endraw %}
+
+{% raw %}
+CONDITION_VALUE_CONTROLLERS_PROD="$(echo "${#K8S_IP_CONTROLLER-PROD[@]}"-1 | bc)";
+{% endraw %}
+
+{% raw %}
+CONDITION_VALUE_WORKERS_PROD="$(echo "${#K8S_IP_WORKER-PROD[@]}"-1 | bc)";
+{% endraw %}
+
+for ((i=0; i<=$CONDITION_VALUE_RANCHER; i++));
+do
+    sshpass -p "$SSH_PASS" ssh-copy-id -i "$PATH_ID_RSA_KEY" "$USER_SSH"@"${RANCHER_IP_NODE[$i]}"
+done
+
+for ((i=0; i<=$CONDITION_VALUE_CONTROLLERS_DEV; i++));
+do
+    sshpass -p "$SSH_PASS" ssh-copy-id -i "$PATH_ID_RSA_KEY" "$USER_SSH"@"${K8S_IP_CONTROLLER_DEV[$i]}"
+done
+
+for ((i=0; i<=$CONDITION_VALUE_WORKERS_DEV; i++));
+do
+    sshpass -p "$SSH_PASS" ssh-copy-id -i "$PATH_ID_RSA_KEY" "$USER_SSH"@"${K8S_IP_WORKER_DEV[$i]}"
+done
+
+for ((i=0; i<=$CONDITION_VALUE_CONTROLLERS_PROD; i++));
+do
+    sshpass -p "$SSH_PASS" ssh-copy-id -i "$PATH_ID_RSA_KEY" "$USER_SSH"@"${K8S_IP_CONTROLLER_PROD[$i]}"
+done
+
+for ((i=0; i<=$CONDITION_VALUE_WORKERS_PROD; i++));
+do
+    sshpass -p "$SSH_PASS" ssh-copy-id -i "$PATH_ID_RSA_KEY" "$USER_SSH"@"${K8S_IP_WORKER_PROD[$i]}"
+done
+
+exit 0

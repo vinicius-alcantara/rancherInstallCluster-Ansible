@@ -1,0 +1,6 @@
+---
+
+ - name: Cluster Runcher Install  
+   include_tasks: clusterRancherInstall.yml
+
+...

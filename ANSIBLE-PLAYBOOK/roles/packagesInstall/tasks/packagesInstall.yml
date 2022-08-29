@@ -1,0 +1,40 @@
+---
+
+ - name: Install a list of packages
+   apt:
+     pkg:
+     - vim
+     - net-tools
+     - htop
+     - ca-certificates
+     - curl
+     - gnupg
+     - lsb-release
+   when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu" and ansible_default_ipv4.address != "{{ ansible_server }}"
+
+ - name: Add Dockers official GPG key
+   ansible.builtin.shell: curl -fsSL "{{ url_download_docker_gpg_key }}" | sudo gpg --dearmor -o "{{ path_archive_docker_gpg_key }}"
+   when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu" and ansible_default_ipv4.address != "{{ ansible_server }}"
+
+ - name: Set up the stable repository
+   ansible.builtin.shell: echo "deb [arch=$(dpkg --print-architecture) signed-by="{{ path_archive_docker_gpg_key }}"] "{{ url_download_docker }}" $(lsb_release -cs) stable" | sudo tee "{{ docker_source_list }}" > /dev/null
+   when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu" and ansible_default_ipv4.address != "{{ ansible_server }}"
+
+ - name: Update all packages
+   apt:
+     name: "*"
+     state: latest
+     update_cache: yes
+   when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu" and ansible_default_ipv4.address != "{{ ansible_server }}"
+
+ - name: Install a list of packages
+   apt:
+     pkg:
+     - "{{ docker_package_version }}"
+     - "{{ docker_ce_cli_package_version }}"
+     - containerd.io
+   notify: 
+   - Start Docker
+   when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu" and ansible_default_ipv4.address != "{{ ansible_server }}"
+
+...

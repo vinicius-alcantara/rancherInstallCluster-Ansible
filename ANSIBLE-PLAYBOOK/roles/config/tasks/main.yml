@@ -1,0 +1,9 @@
+---
+
+ - name: Configs Step1 
+   include_tasks: configStep1.yml
+
+ - name: Configs Step2 
+   include_tasks: configStep2.yml
+
+...

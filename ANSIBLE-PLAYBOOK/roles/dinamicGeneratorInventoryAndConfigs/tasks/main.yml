@@ -1,0 +1,6 @@
+---
+
+ - name: Dinamic Generator Inventory and Configs 
+   include_tasks: dinamicGeneratorInventoryAndConfigs.yml
+
+...

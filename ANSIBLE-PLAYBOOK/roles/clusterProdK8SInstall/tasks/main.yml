@@ -1,0 +1,6 @@
+---
+
+ - name: Configs  
+   include_tasks: config.yml
+
+...

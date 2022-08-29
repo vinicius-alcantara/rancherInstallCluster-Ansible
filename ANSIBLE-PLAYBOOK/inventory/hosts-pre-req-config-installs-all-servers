@@ -1,0 +1,25 @@
+[allServers]
+
+#### IPs RANCHER cluster ####
+RANCHER_NODE1 ansible_host="10.1.203.83"
+RANCHER_NODE2 ansible_host="10.1.203.64"
+RANCHER_NODE3 ansible_host="10.1.203.84"
+
+#### IPs K8S cluster DEV ####
+K8S_CONTROLLER1_DEV ansible_host="10.1.203.85"
+K8S_CONTROLLER2_DEV ansible_host="10.1.203.41"
+K8S_CONTROLLER3_DEV ansible_host="10.1.203.44"
+K8S_WORKER1_DEV ansible_host="10.1.203.76"
+K8S_WORKER2_DEV ansible_host="10.1.203.87"
+K8S_WORKER3_DEV ansible_host="10.1.203.96"
+
+#### IPs K8S cluster PROD ####
+K8S_CONTROLLER1_PROD ansible_host="10.1.203.90"
+K8S_CONTROLLER2_PROD ansible_host="10.1.203.91"
+K8S_CONTROLLER3_PROD ansible_host="10.1.203.92"
+K8S_WORKER1_PROD ansible_host="10.1.203.93"
+K8S_WORKER2_PROD ansible_host="10.1.203.94"
+K8S_WORKER3_PROD ansible_host="10.1.203.95"
+
+#### IP Ansible Server ####
+ANSIBLE_SERVER ansible_host="192.168.100.4"

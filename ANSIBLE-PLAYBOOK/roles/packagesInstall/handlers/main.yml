@@ -1,0 +1,9 @@
+---
+# handlers 
+
+ - name: Start Docker
+   systemd:
+     state: started
+     enabled: yes
+     name: docker
+

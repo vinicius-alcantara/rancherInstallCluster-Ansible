@@ -1,0 +1,31 @@
+nodes:
+  - address: {{ ranche_ip_node1 }}
+    user: {{ user_ssh }}
+    ssh_key_path: {{ path_ssh_key }}
+    kubernetes_version: {{ k8s_version }}
+    hostname_override: {{ ranche_hostname_node1 }}
+    enable_cri_dockerd: true
+    role: [controlplane, worker, etcd]
+  - address: {{ ranche_ip_node2 }}
+    user: {{ user_ssh }}
+    ssh_key_path: {{ path_ssh_key }}
+    kubernetes_version: {{ k8s_version }}
+    hostname_override: {{ ranche_hostname_node2 }}
+    enable_cri_dockerd: true
+    role: [controlplane, worker, etcd]
+  - address: {{ ranche_ip_node3 }}
+    user: {{ user_ssh }}
+    ssh_key_path: {{ path_ssh_key }}
+    kubernetes_version: {{ k8s_version }}
+    hostname_override: {{ ranche_hostname_node3 }}
+    enable_cri_dockerd: true
+    role: [controlplane, worker, etcd]
+
+network:
+  plugin: weave
+
+services:
+  etcd:
+    snapshot: true
+    creation: 6h
+    retention: 24h

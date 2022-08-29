@@ -1,0 +1,31 @@
+---
+
+ansible_server: 192.168.100.4
+path_script_ssh_pass: "/root/PROJETO-RANCHER-ITURAN/SCRIPTS/sshPassExportKey.sh"
+user_ssh: "root"
+ssh_pass: "h4ck3r1918"
+path_ssh_key: "/root/.ssh/id_rsa"
+inventory_all_servers: "/root/PROJETO-RANCHER-ITURAN/ANSIBLE-PLAYBOOK/inventory/hosts-pre-req-config-installs-all-servers"
+path_vars_config_main: "/root/PROJETO-RANCHER-ITURAN/ANSIBLE-PLAYBOOK/roles/config/vars/main.yml" 
+
+#### Obs. Tudo abaixo é gerado dinâmicamente ####
+
+
+####:ips:rancher:cluster:####
+rancher_node1: "10.1.203.83"
+rancher_node2: "10.1.203.64"
+rancher_node3: "10.1.203.84"
+####:ips:k8s:cluster:dev:####
+k8s_controller1_dev: "10.1.203.85"
+k8s_controller2_dev: "10.1.203.41"
+k8s_controller3_dev: "10.1.203.44"
+k8s_worker1_dev: "10.1.203.76"
+k8s_worker2_dev: "10.1.203.87"
+k8s_worker3_dev: "10.1.203.96"
+####:ips:k8s:cluster:prod:####
+k8s_controller1_prod: "10.1.203.90"
+k8s_controller2_prod: "10.1.203.91"
+k8s_controller3_prod: "10.1.203.92"
+k8s_worker1_prod: "10.1.203.93"
+k8s_worker2_prod: "10.1.203.94"
+k8s_worker3_prod: "10.1.203.95"

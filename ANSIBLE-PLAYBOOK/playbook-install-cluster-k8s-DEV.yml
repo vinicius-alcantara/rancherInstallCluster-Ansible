@@ -1,0 +1,8 @@
+---
+
+ - name: Install cluster k8s/rancher 
+   hosts: all
+   roles:
+      - clusterDevK8SInstall
+
+...

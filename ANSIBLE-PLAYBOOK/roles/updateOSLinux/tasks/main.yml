@@ -1,0 +1,16 @@
+---
+
+# - name: Centos Update
+#   include_tasks: redhat_centos.yml
+
+
+# - name: libxml update
+#   include_tasks: libxml_redhat_centos.yml
+
+# - name: java update
+#   include_tasks: java_redhat_centos.yml
+
+ - name: Ubuntu Update  
+   include_tasks: debian_ubuntu.yml
+
+...

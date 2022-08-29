@@ -1,0 +1,12 @@
+---
+
+inventory_all_servers: "/root/PROJETO-RANCHER-ITURAN/ANSIBLE-PLAYBOOK/inventory/hosts-pre-req-config-installs-all-servers"
+path_vars_config_main: "/root/PROJETO-RANCHER-ITURAN/ANSIBLE-PLAYBOOK/roles/config/vars/main.yml" 
+inventory_cluster_rancher: "/root/PROJETO-RANCHER-ITURAN/ANSIBLE-PLAYBOOK/inventory/hosts-cluster-k8s-rancher"
+path_vars_cluster_rancher_main: "/root/PROJETO-RANCHER-ITURAN/ANSIBLE-PLAYBOOK/roles/clusterRancherInstall/vars/main.yml"
+inventory_cluster_k8s_dev: "/root/PROJETO-RANCHER-ITURAN/ANSIBLE-PLAYBOOK/inventory/hosts-cluster-k8s-DEV"
+path_vars_cluster_k8s_dev_main: "/root/PROJETO-RANCHER-ITURAN/ANSIBLE-PLAYBOOK/roles/clusterDevK8SInstall/vars/main.yml"
+inventory_cluster_k8s_prod: "/root/PROJETO-RANCHER-ITURAN/ANSIBLE-PLAYBOOK/inventory/hosts-cluster-k8s-PROD"
+path_vars_cluster_k8s_prod_main: "/root/PROJETO-RANCHER-ITURAN/ANSIBLE-PLAYBOOK/roles/clusterProdK8SInstall/vars/main.yml"
+
+

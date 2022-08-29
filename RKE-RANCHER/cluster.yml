@@ -1,0 +1,31 @@
+nodes:
+  - address: 10.1.203.83
+    user: root
+    ssh_key_path: /root/.ssh/id_rsa
+    kubernetes_version: v1.22.6-rancher1-1
+    hostname_override: rancher-node1
+    enable_cri_dockerd: true
+    role: [controlplane, worker, etcd]
+  - address: 10.1.203.64
+    user: root
+    ssh_key_path: /root/.ssh/id_rsa
+    kubernetes_version: v1.22.6-rancher1-1
+    hostname_override: rancher-node2
+    enable_cri_dockerd: true
+    role: [controlplane, worker, etcd]
+  - address: 10.1.203.84
+    user: root
+    ssh_key_path: /root/.ssh/id_rsa
+    kubernetes_version: v1.22.6-rancher1-1
+    hostname_override: rancher-node3
+    enable_cri_dockerd: true
+    role: [controlplane, worker, etcd]
+
+network:
+  plugin: weave
+
+services:
+  etcd:
+    snapshot: true
+    creation: 6h
+    retention: 24h
