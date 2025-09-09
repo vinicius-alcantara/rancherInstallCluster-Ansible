@@ -1,6 +1,6 @@
 # rancherInstallCluster-Ansible
 
-Automação via Ansible para instalação e configuração de **Rancher** em um cluster Kubernetes.
+Automação via Ansible para instalação e configuração de **Rancher** via RKE.
 
 ---
 
